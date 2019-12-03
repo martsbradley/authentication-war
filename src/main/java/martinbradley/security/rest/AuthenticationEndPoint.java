@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.Collections;
 import java.util.List;
 
-@Path("/authenticate")
+@Path("/verifyuser")
 public class AuthenticationEndPoint
 {
     private static Logger logger = LoggerFactory.getLogger(AuthenticationEndPoint.class);
@@ -37,7 +37,7 @@ public class AuthenticationEndPoint
             cookies = ch.handleSuccessfulLogin(jasonWebToken);
         }
         catch (Exception e) {
-            logger.warn("Access denied for " + userDetails, e);
+            logger.warn("Access denied for " + userDetails);
             return Response.status(Response.Status.UNAUTHORIZED)
                     .type(MediaType.APPLICATION_JSON)
                     .build();

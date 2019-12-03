@@ -76,6 +76,33 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                  <execution>
+                    <id>copy-ear-into-docker</id>
+                        <phase>package</phase>   <!-- After packaging copy it into deployment folder -->
+                    <goals>
+                        <goal>copy</goal>
+                    </goals>
+                    <configuration>
+                        <fileSets>
+                            <fileSet> 
+                                
+                                <sourceFile>target/authentication-war.war</sourceFile>
+                                <destinationFile>/home/martin/Software/Docker/Gorticrum/data/jboss/deployments/authentication-war.war</destinationFile>
+                            </fileSet>
+                            <fileSet> 
+                                <sourceFile>/home/martin/Software/Java/AuthenticationEar/pom.xml</sourceFile>
+                                <destinationFile>/home/martin/Software/Docker/Gorticrum/data/jboss/deployments/authentication-war.war.deployed</destinationFile>
+                            </fileSet>
+                        </fileSets>
+                    </configuration>
+                  </execution>
+                </executions>
+              </plugin>
         </plugins>
     </build>
 

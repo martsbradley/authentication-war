@@ -1,6 +1,6 @@
 package martinbradley.security;
 
-import javax.servlet.http.Cookie;
+//import javax.servlet.http.Cookie;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,16 +59,20 @@ public class CookieHandler {
 
         return cookies;
     }
-    public void clearCookies(HttpServletResponse response) {
+    public List<NewCookie> clearCookies() {
+        List<NewCookie> cookies = new ArrayList<>();
+        String comment = "";
+        String path = "/";
+        int maxAge = 0;
+        final boolean useHttps = true;
+        final boolean httpOnly = true;
+        final boolean notHttpOnly = false;
+
         for (String cookieName : cookieNames){
-            Cookie cookie = new Cookie(cookieName, null); // Not necessary, but saves bandwidth.
-            cookie.setPath("/");
-
-            cookie.setHttpOnly(true);
-
-            cookie.setMaxAge(0); // Don't set to -1 or it will become a session cookie!
-            response.addCookie(cookie);
+            NewCookie cookie = new NewCookie(cookieName, null); // Not necessary, but saves bandwidth.
+            cookies.add(new NewCookie(cookieName, "", path, domain, comment, maxAge, useHttps, httpOnly));
             logger.debug("Clearing " + cookieName);
         }
+        return cookies;
     }
 }

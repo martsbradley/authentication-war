@@ -6,7 +6,7 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 
-@ApplicationPath("/auth")
+@ApplicationPath("/")
 public class AuthenticationApp extends Application
 {
 }
